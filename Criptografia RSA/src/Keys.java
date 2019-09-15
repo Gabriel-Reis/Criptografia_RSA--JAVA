@@ -8,6 +8,10 @@ public class Keys {
     BigInteger n;
     BigInteger z;
 	
+    public void GerarKeyJAva() {
+    	
+    }
+    
 	public void GerarKeyBasica() {
 		p = new BigInteger("885320963");
 	    q = new BigInteger("238855417");
