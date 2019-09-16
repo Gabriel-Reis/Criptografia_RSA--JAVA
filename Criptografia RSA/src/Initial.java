@@ -12,8 +12,8 @@ public class Initial {
 			keys.GerarKeyBasica();
 			System.out.println(keys);
 				
-		//Recebe Sting e converte para BigInteger.
-			String teste = "1234567";
+		//Recebe String e converte para BigInteger.
+			String teste = "pamonha";
 			System.out.println("Conteúdo original: \t\t\t" +teste);
 			BigInteger input = TradutorTexto.StringToBigInteger(teste);
 			System.out.println("Conteúdo convertido para encriptação: \t" +input);
