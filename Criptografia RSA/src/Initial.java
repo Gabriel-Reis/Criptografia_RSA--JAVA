@@ -9,15 +9,21 @@ public class Initial {
 
 	private static Encripta encriptador;
 	private static Decripta decriptador = new Decripta();
-	private static int tamanho = 100;
+	//Parametros do programa (Tamanho da entrada e primos para gerar chave)
+	private static int tamanho = 5000;
+	private static BigInteger primoA = new BigInteger("170141183460469231731687303715884105727");
+	private static BigInteger primoB = new BigInteger("162259276829213363391578010288127");
+	// 127, 8191, 131071, 524287, 2147483647, 2305843009213693951, 618970019642690137449562111, 
+	//162259276829213363391578010288127, 170141183460469231731687303715884105727
 	
 	public static void main(String args[]) {
 		
 		//Gera Chaves
 			Keys keys = new Keys();
-			keys.GerarKeyBasica();
+			keys.GerarKeyBasica(primoA,primoB);
 			System.out.println(keys);
-				
+			System.out.println("Chave de " + ((int) (Math.log(keys.getE().doubleValue())/Math.log(2))) +" bits");
+			
 		//Recebe String e converte para BigInteger.
 			String teste ="";
 			try {
@@ -55,14 +61,16 @@ public class Initial {
 		
 		//Retorna BigInteger para Texto 
 			String fim = TradutorTexto.BigIntegerArrayToString(decriptado);
-			if(teste.equals(fim))
+			if(teste.equals(fim)) {
 				System.out.println("Sem erros ao decriptar");
-			
-		//Imprime início para conferir decriptação
-			if(fim.length() > 100)
-				System.out.println(fim.substring(0,100));
+				if(fim.length() > 100)
+					System.out.println(fim.substring(0,100));
+				else
+					System.out.println(fim.substring(0,fim.length()));
+			}
 			else
-				System.out.println(fim.substring(0,fim.length()));
+				System.out.println("FAIL");
+			
 	}
 
 }

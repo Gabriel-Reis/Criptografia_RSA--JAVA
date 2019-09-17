@@ -6,37 +6,51 @@ public class Keys {
     BigInteger q;	//Numero para descoberta de chave
     BigInteger n;	//Expoente
     BigInteger z;	//Utiliza para descobrir Função inversa - primo correlacionado
-    BigInteger e;	//
-    BigInteger d;	//
+    BigInteger e;	//Chave publica (n,e)
+    BigInteger d;	//Chave privada (d,e)
 	
-    public void GerarKeyBasica() {
-		p = new BigInteger("241");
-	    q = new BigInteger("13");n = p.multiply(q);
+    public void GerarKeyBasica(BigInteger p, BigInteger q) {
+    	this.p = p;
+    	this.q = q;
+	    n = p.multiply(q);
 	    z = (p.subtract(BigInteger.ONE)).multiply(q.subtract(BigInteger.ONE));
-	    e = new BigInteger("2159");
 	    
-	    for(int i=p.intValue()*3;i<500000;i++) {
-	    	int mdc = mdc(z.intValue(),i); 
-	    	if( mdc == 1) {
-	    		e = BigInteger.valueOf( i);
+	    for(BigInteger i=p.multiply(BigInteger.valueOf(3));true;i = i.add(BigInteger.ONE)) {
+	    	BigInteger mdc = i.gcd(z);
+	    	if( mdc.compareTo(BigInteger.ONE)==0) {
+	    		e = i;
 	    		break;
 	    	}
-	    		
 	    }
-	    d = e.modInverse(z);
 	    
+	    /*for(int i=p.intValue()*3;true;i++) {
+	    	int mdc = mdc(z.intValue(),i);
+	    	if( mdc == 1) {
+	    		e = BigInteger.valueOf(i);
+	    		break;
+	    	}
+	    }*/
+	    
+	    d = e.modInverse(z);
 	}
-    
+
+
+	/*public static int mdceu(BigInteger a, BigInteger b){
+		while ( a.mod(b).(BigInteger.valueOf(0)) != 0 ) {  
+			int a3 = a%b;   
+		     a = b;  
+		     b = a3;  
+		}
+		return b;  
+	}*/
+
     public int mdc( int x, int y ){
-        if(x == y){
+        if(x == y)
             return x;
-        }
-        else if( y > x ){
+        else if( y > x )
             return mdc( x, y-x );
-        }
-        else if( x > y ){
+        else if( x > y )
             return mdc( x - y, y );
-        }
         return 0;
     }
     	
