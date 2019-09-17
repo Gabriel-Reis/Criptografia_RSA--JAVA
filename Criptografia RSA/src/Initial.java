@@ -9,7 +9,7 @@ public class Initial {
 
 	private static Encripta encriptador;
 	private static Decripta decriptador = new Decripta();
-	private static int tamanho = 0;
+	private static int tamanho = 100;
 	
 	public static void main(String args[]) {
 		
@@ -30,7 +30,7 @@ public class Initial {
 		//Converte para BigIntegers
 			if(tamanho == 0)
 				tamanho = teste.length();
-			teste = teste.substring(0, teste.length());
+			teste = teste.substring(0, tamanho);
 			System.out.println("Tamanho do texto: " +teste.length());
 			
 			long start = System.currentTimeMillis();
