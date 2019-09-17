@@ -1,19 +1,19 @@
 import java.math.BigInteger;
+import java.util.ArrayList;
 
 public class Decripta {
 
-	public BigInteger decriptar(BigInteger inputEncrypted, Keys keys) {
+	public ArrayList<BigInteger> decriptar(ArrayList<BigInteger> codificado, Keys keys) {
 		
 		// Recupera Keys Values
-        //BigInteger e = keys.getE();
         BigInteger n = keys.getN();
-        //BigInteger z = keys.getZ();
         BigInteger d = keys.getD();
+        ArrayList<BigInteger> decodificado = new ArrayList<>();
                 
-        byte[] inputAsBytesEncrypted = inputEncrypted.toByteArray();      
-        byte[] inputDecrypted = (new BigInteger(inputAsBytesEncrypted)).modPow(d, n).toByteArray();
-        BigInteger decrypted = new BigInteger(inputDecrypted);
-        
-        return decrypted;
+        for (int i = 0; i < codificado.size(); i++) {
+			decodificado.add(codificado.get(i).modPow(d, n));
+		}
+       
+        return decodificado;
 	}
 }
